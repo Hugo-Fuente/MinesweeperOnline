@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>
+      Campo Minado
+    </title>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    <script type="text/javascript" src="script.js"></script>
+    <style>
+      a:link {
+        color: rgb(0, 184, 0);
+        background-color: transparent;
+        text-decoration: none;
+      }
+      
+      a:visited {
+        color: pink;
+        background-color: transparent;
+        text-decoration: none;
+      }
+      
+      a:hover {
+        color: red;
+        background-color: transparent;
+        text-decoration: underline;
+      }
+      
+      a:active {
+        color: yellow;
+        background-color: transparent;
+        text-decoration: underline;
+      }
+      h1 {
+        font-size: 3em;
+        color: orangered;
+      }
+      </style> 
+</head>
+
+<body style="background-image: url(duck.jpg); background-size: 100%;">
+  <header id="titulo">
+    <h1>Campo Minado</h1>
+  </header>
+
+  <nav id="menu">
+    <ul>
+      <li><a href="login.html">Login/Cadastro</a></li>
+      <li><a href="ranking.html">Ranking Global de Jogadores</a></li>
+      <li><a href="edicao.html">Edição de Informação do Usuário</a></li>
+    </ul>
+  </nav>
+    
+  <table id="tabela">
+
+  </table>
+
+  <aside id="historico">
+    <!--nome do jogador, dimensao utilizada, numero
+    de bombas no campo, modalidade, tempo gasto,
+    resultado, data/hora da partida-->
+
+  <!--
+    <table>
+      <tr>
+      <th>Nome</th>
+      <th>Dimensão</th>
+      <th>Numero de bombas</th>
+      <th>Modalidade</th>
+      <th>Tempo Utilizado</th>
+      <th>Resultado</th>
+      <th>Data/Hora</th>
+          <td>Dom Pedro I</td>
+          <td>16x16</td>
+          <td>5</td>
+          <td>Clássico</td>
+          <td>7:08</td>
+          <td>Vitória</td>
+          <td>14:02  07/09/21</td>
+      </tr>
+      <tr>
+        <td>Dom Pedro II</td>
+        <td>8x8</td>
+        <td>12</td>
+        <td>Clássico</td>
+        <td>9:15</td>
+        <td>Vitória</td>
+        <td>18:29  09/09/21</td>
+      </tr>
+      <tr>
+        <td>Dom Pedro III</td>
+          <td>16x16</td>
+          <td>6</td>
+          <td>Rivotril</td>
+          <td>17:08</td>
+          <td>Vitória</td>
+          <td>04:12  05/09/21</td>
+      </tr>
+      <tr>
+        <td>Dom Pedro IV</td>
+          <td>32x32</td>
+          <td>7</td>
+          <td>Clássico</td>
+          <td>17:08</td>
+          <td>Vitória</td>
+          <td>18:02  07/09/21</td>
+      </tr>
+      <tr>
+        <td>Dom Pedro V</td>
+          <td>8x8</td>
+          <td>10</td>
+          <td>Clássico</td>
+          <td>27:58</td>
+          <td>Vitória</td>
+          <td>16:02  08/09/21</td>
+      </tr>
+      <tr>
+        <td>Dom Pedro VI</td>
+          <td>16x16</td>
+          <td>3</td>
+          <td>Rivotril</td>
+          <td>7:08</td>
+          <td>Vitória</td>
+          <td>14:02  07/09/21</td>
+      </tr>
+    </table>
+    -->
+  </aside>
+
+  <section id="opcoes">
+    <label>Dimensão do Grid:</label>
+      <select id="dificuldade">
+        <option value="0" selected>Fácil</option>
+        <option value="1">Intermediário</option>
+        <option value="2">Difícil</option>
+      </select>
+    
+    <br><br>
+    <label>Número de Bombas:</label>
+        <input type="number"><br><br>
+
+    <label>Modalidade da Partida:</label>
+      <select>
+        <option value="0" selected>Clássica</option>
+        <option value="1">Rivotril</option>
+      </select>
+    </section>
+
+    <section id="tempo">
+      <p>Tempo de Partida: 20:39</p>
+      
+      <!--Modo Rivotril
+      <p>Tempo para acabar: 40:12</p>
+      -->
+    </section>
+
+    <section id="trapaca">
+      <button>Trapacear</button>
+    </section>
+
+  <footer>
+	</footer>
+
+</body>
+</html>
