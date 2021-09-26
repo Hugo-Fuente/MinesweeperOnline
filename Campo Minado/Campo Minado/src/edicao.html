@@ -1,38 +1,76 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <title>Campo Minado - Edição de Informação</title>
-        <meta charset="UTF-8" />
-        <link rel="stylesheet" type="text/css" href="style.css" />
-        <script type="text/javascript" src="script.js"></script>
-    </head>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro</title>
 
+    <link rel="stylesheet" href="edicao.css">
+</head>
 <body>
-	<header id="titulo">
-        <h1>Edição de Informação</h1>
-    </header>
-	
-	<nav id="menu">
-        <ul>
-          <li><a href="index.html">Campo Minado</a></li>
-          <li><a href="ranking.html">Ranking Global de Jogadores</a></li>
-          <li><a href="login.html">Sair</a></li>
-        </ul>
-    </nav>
+    <div>
+        <h1 style="font-style: italic;">Editor Perfil</h1>
+        <br>
+    </div>
 
-    <section id="edicao">
-        <!--nome (pode mudar)
-            data de nascimneto (nn)
-            CPF (nn)
-            telefone (pode)
-            e-mail (pode)
-            username (nn)
-            senha (pode)-->
-    </section>
-
-	<footer>
+    <style>
+        a:link {
+          color: rgb(255, 255, 255);
+          background-color: transparent;
+          text-decoration: none;
+        }
         
-    </footer>
-	
-</body>
+        a:visited {
+          color: rgb(255, 255, 255);
+          background-color: transparent;
+          text-decoration: none;
+        }
+        
+        a:hover {
+          color: red;
+          background-color: transparent;
+        }
+        
+        a:active {
+          color: yellow;
+          background-color: transparent;
+        }
+        </style>
+
+    <form>
+        <fieldset class="grupo">
+           
+            <br><br><br><br>
+            <div class="campo">
+                <label><strong>Telefone</strong></label>
+                <input type="tel" name="telefone" id=telefone>
+            </div>
+
+            </div>
+            
+        </fieldset>
+
+        <div class="campo">
+            <label><strong>Email</strong></label>
+            <input type="email" name="email" id="email">
+        </div>
+
+        <div class="campo">
+            <label><strong>Username</strong></label>
+            <input type="text" name="username" id="username">
+        </div>
+
+        <div class="campo">
+            <label for="senha"><strong>Senha</strong></label>
+            <input type="password" name="password" id="password">
+        </div>
+        
+        <button class="botao" type="submit" onsubmit=""> <a href="login.html">Concluído</a></button>
+        
+    </form>
+    <head>
+    
+        
+        </body>
 </html>
