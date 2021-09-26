@@ -1,0 +1,49 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+#titulo {
+    font-family: sans-serif;
+    color: #380B61;
+    margin-left: 7%;
+} 
+
+#subtitulo {
+    font-family: sans-serif;
+    color: #380B61;
+    margin-left: 10%;
+} 
+
+#check{
+    display: inline-block;
+}
+
+body{
+    background-color: #F0F8FF;
+}
+
+.titulo {
+    color: #59429d;
+    margin-left: 36%;
+    margin-top: 2%;
+    justify-content: center;
+}
+
+.itens {
+    font-family: sans-serif;
+    font-size: 1em;
+    margin-left: 2%;
+}
+
+.tabela tabela{
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.tabela th, td {
+    text-align: left;
+    padding: 8px;
+}
+      
+.tabela tr:nth-child(even) {background-color: #f2f2f2;}
