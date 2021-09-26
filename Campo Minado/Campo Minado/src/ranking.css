@@ -39,19 +39,25 @@ body{
 table.tabela tabela{
     border-collapse: collapse;
     width: 100%;
+    height: 100%;
     margin-left:auto; 
     margin-right:auto;
     text-align: center;
+    display: flex; /* WIDTH and HEIGHT are required*/
+    justify-content: center;
+    align-items: center;
 }
 
 table.tabela th, td {
     text-align: left;
     padding: 8px;
+    
 }
       
 table.tabela tr:nth-child(even) {
     background-color: #f2f2f2;
     text-align: left;
+    
 }
 
 div.container {
