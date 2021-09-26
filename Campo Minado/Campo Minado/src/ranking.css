@@ -36,14 +36,25 @@ body{
     margin-left: 2%;
 }
 
-.tabela tabela{
+table.tabela tabela{
     border-collapse: collapse;
     width: 100%;
+    margin-left:auto; 
+    margin-right:auto;
+    text-align: center;
 }
 
-.tabela th, td {
+table.tabela th, td {
     text-align: left;
     padding: 8px;
 }
       
-.tabela tr:nth-child(even) {background-color: #f2f2f2;}
+table.tabela tr:nth-child(even) {
+    background-color: #f2f2f2;
+    text-align: left;
+}
+
+div.container {
+    width:98%; 
+    margin:1%;
+  }
