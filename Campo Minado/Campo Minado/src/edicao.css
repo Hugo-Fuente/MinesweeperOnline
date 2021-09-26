@@ -117,3 +117,24 @@ fieldset.grupo .campo {
     cursor: pointer;
 }
 
+.botao a:link {
+    color: rgb(255, 255, 255);
+    background-color: transparent;
+    text-decoration: none;
+}
+
+.botao a:visited {
+    color: rgb(255, 255, 255);
+    background-color: transparent;
+    text-decoration: none;
+}
+
+.botao a:hover {
+    color: red;
+    background-color: transparent;
+}
+
+.botao a:active {
+    color: yellow;
+    background-color: transparent;
+}
