@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Login</title>
+    <link rel="stylesheet" href="style.css" type="text/css">
+	<script src="cadastrar.js"></script>
+    <!-- fonte usada em algumas partes do site-->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Odibee+Sans&display=swap');
+    </style>
+</head>
+
+<body>
+    <section id="tela">
+        <section class="cabecalho">
+                <h1 class="titulo">Login</h1>
+        </section>
+
+		<h4 id="invalido"></h4>
+		
+        <section>
+			<form name="formulario" onsubmit="return login()">
+				
+                <p>Username: <input class="texto" type="text" name="username" /></p><br>
+				
+				<p>Senha: <input class="texto" type="password" name="senha"></p>
+	
+			<input class="normal" type="submit" value="LOGIN" /><br>
+        </section>
+
+		<button class="normal" type="button" onclick="window.location.href='cadastro.html'">Cadastre-se</button>
+    </section>
+</body>
+</html>
