@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Cadastro</title>
+    <link rel="stylesheet" href="style.css" type="text/css">
+	<script src="cadastrar.js"></script>
+    <!-- fonte usada em algumas partes do site-->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Odibee+Sans&display=swap');
+    </style>
+</head>
+
+<body>
+    <section id="tela_cadastro">
+        <section class="cabecalho">
+                <h1 class="titulo">Cadastro</h1>
+        </section>
+
+        <section>
+			<form name="formulario" onsubmit="return cadastrar()">
+				<p>Nome: <input class="texto" type="text" name="nome" /></p><br>
+	
+                <p>CPF: <input class="num" type="num" name="cpf" /></p><br>
+
+                <p>Data de Nascimento: <input class="num" type="date" name="nascimento" /></p><br>
+
+                <p>Username: <input class="texto" type="text" name="username" /></p><br>
+
+				<p>Email: <input class="texto" type="email" name="email" /></p><br>
+			   
+				<p>Telefone:&nbsp;&nbsp;&nbsp;&nbsp; <input class="num" type="num" 
+					name="telefone" /> </p><br>
+				
+				<p>Senha: <input class="texto" type="password" name="senha"></p>
+	
+			<input class="normal" type="submit" value="CADASTRAR" />
+        </section>
+    </section>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!--status: fazer o editar perfil
+            fazer o login
+            fazer a tela de escolha
+            JS nas informações da partida (esconder trapaça e informações)
+            JS com os dados do usuario da sessão
+            colocar o campo minado no index
+            Rivotril-->
+
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Campo Minado</title>
+    <link rel="stylesheet" href="style.css" type="text/css">
+    
+    <!-- fonte usada em algumas partes do site-->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Odibee+Sans&display=swap');
+    </style>
+</head>
+
+<body>
+    <!-- a seção tela é o quadrado que contém todas
+    as outras seções do site. Para ter esse efeito, 
+    ela funciona, basicamente, como um body dentro de 
+    um body-->
+    <section id="tela">
+
+        <section class="cabecalho">
+                <h1 class="titulo">Campo Minado</h1>
+        </section>
+
+        <aside class="lateral">
+            <h4>Informações</h4>
+                Tempo: 0:12:43<br/><br/>
+                Dimensão: 5X5<br/><br/>
+                Bombas: 3
+        </aside>
+
+        <section id="jogo">
+            <canvas width="400" height="400"></canvas>
+        </section>             
+            
+        <section class="botoes">  
+            <button class="normal" type="button" onclick="window.location.href='alteracoes.html'">Perfil</button>
+            <button class="normal" type="button" onclick="reiniciar()" id="btNovo">Trapaça</button>
+            <button class="normal" type="button" onclick="window.location.href='historico.html'">Histórico</button><br><br>
+            <button class="normal" type="button" onclick="window.location.href='ranking.html'">Ranking</button>
+            <button class="normal" type="button" onclick="window.location.href='desconexao.html'">Sair</button>
+        </section>
+
+    </section>
+    <script src="campo_minado.js"></script>
+
+</body>
+</html>
