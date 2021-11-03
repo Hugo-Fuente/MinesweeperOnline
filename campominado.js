@@ -112,14 +112,6 @@ function revealMines() {
         if (cell.getAttribute("data-mine")=="true") cell.className="mine";
       }
     }
-    setTimeout(function() {// Hides the highllighted mines after 5 seconds
-      for (var i=0; i<10; i++) {
-        for(var j=0; j<10; j++) {
-          var cell = grid.rows[i].cells[j];
-          if (cell.getAttribute("data-mine")=="true") cell.className="hidden";
-        }
-      }
-    }, 5000);
 }
 
 function checkLevelCompletion() {
@@ -164,4 +156,22 @@ function clickCell(cell) {
     }
     checkLevelCompletion();
   }
+}
+
+function cheatButton(){
+    //Highlight all mines in red
+  for (var i=0; i<10; i++) {
+    for(var j=0; j<10; j++) {
+      var cell = grid.rows[i].cells[j];
+      if (cell.getAttribute("data-mine")=="true") cell.className="mine";
+    }
+  }
+  setTimeout(function() { // Hides the highlighted mines after 5 seconds
+    for (var i=0; i<10; i++) {
+      for(var j=0; j<10; j++) {
+        var cell = grid.rows[i].cells[j];
+        if (cell.getAttribute("data-mine")=="true") cell.className="hidden";
+      }
+    }
+  }, 5000);
 }
