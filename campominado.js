@@ -215,7 +215,7 @@ function revealMines() {
   for (var i = 0; i < dimensao; i++) {
     for (var j = 0; j < dimensao; j++) {
       var cell = grid.rows[i].cells[j];
-      if (cell.getAttribute("data-mine") == "true") cell.className = "mine";
+      if (cell.getAttribute("data-mine") == "true") cell.className = "mine", cell.innerHTML="💣";
     }
   }
 }
