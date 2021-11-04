@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Configurações</title>
+    <link rel="stylesheet" href="style.css" type="text/css">
+	<script src="campominado.js"></script>
+    <!-- fonte usada em algumas partes do site-->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Odibee+Sans&display=swap');
+    </style>
+</head>
+
+<body>
+    <section id="tela">
+        <section class="cabecalho">
+            <h1 class="titulo">Configurações</h1>
+        </section>    
+        
+        <h4 id="invalido"></h4>
+
+        <form name="formulario" onsubmit="return configs()">
+            <p>Dimensão: <input class="pequeno" type="num" name="dimensaoX" />
+            X<input class="pequeno" type="num" name="dimensaoY" /><br>
+
+            <p>Quantidade de Bombas: <input class="pequeno" type="num" name="bombas" /></p><br>
+
+            <label for="modalidade">Modalidade:</label>
+            <select name="modalidade" id="modalidade" class="box">
+                <option value="classica">Clássica</option>
+                <option value="rivotril">Rivotril</option>
+            </select><br><br><br>
+
+            <input class="normal" type="submit" value="JOGAR" />
+        </form>
+    </section>
+
+</body>
+</html>
