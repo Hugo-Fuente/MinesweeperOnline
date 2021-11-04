@@ -1,0 +1,59 @@
+<!--status: fazer o editar perfil
+            fazer o login
+            fazer a tela de escolha (forms com as configs do jogo)
+            JS nas informações da partida (esconder trapaça e informações)
+            JS com os dados do usuario da sessão
+            Rivotril
+            ajustar o tabuleiro ao tamanho do espaço reservado
+            quando temos muitas células no campo minado-->
+
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Campo Minado</title>
+    <link rel="stylesheet" href="style.css" type="text/css">
+    
+    <!-- fonte usada em algumas partes do site-->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Odibee+Sans&display=swap');
+    </style>
+</head>
+
+<body>
+    <!-- a seção tela é o quadrado que contém todas
+    as outras seções do site. Para ter esse efeito, 
+    ela funciona, basicamente, como um body dentro de 
+    um body-->
+    <section id="tela">
+
+        <section class="cabecalho">
+                <h1 class="titulo">Campo Minado</h1>
+        </section>
+
+        <aside class="lateral">
+            <h4>Informações</h4>
+                Tempo: <div id="tempo"></div><br/><br/>
+                Dimensão: <div id="dimensao">5X5</div><br/><br/>
+                Bombas: <div id="bombas">3</div>
+        </aside>
+
+        <!-- onde o jogo irá rodar -->
+        <section id="jogo">
+            <table id=grid>
+            </table>
+        </section>             
+            
+        <section class="botoes">  
+            <button class="normal" type="button" onclick="window.location.href='alteracoes.html'">Perfil</button>
+            <button class="normal" type="button" onclick="cheatButton();" id="btNovo">Trapaça</button>
+            <button class="normal" type="button" onclick="window.location.href='historico.html'">Histórico</button><br><br>
+            <button class="normal" type="button" onclick="window.location.href='ranking.html'">Ranking</button>
+            <button class="normal" type="button" onclick="window.location.href='desconexao.html'">Sair</button>
+        </section>
+
+    </section>
+    <script src="campominado.js"></script>
+
+</body>
+</html>
