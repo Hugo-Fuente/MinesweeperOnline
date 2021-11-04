@@ -73,6 +73,26 @@ function alterar() {
 
 /*---------------------- JOGO ------------------------*/
 
+const comecarMinutos = 10;
+let tempo = comecarMinutos * 60;
+
+const temporizadorEl = document.getElementById('tempo');
+
+setInterval(updateCountdown, 1000);
+
+function updateCountdown() {
+    let minutos = Math.floor(tempo / 60);
+    minutos = minutos < 10 ? '0' + minutos : minutos; //se minutos < 10, adicionar 0 a esquerda. Ex: 07:23
+
+    let segundos = tempo % 60;
+    segundos = segundos < 10 ? '0' + segundos : segundos; //se segundos < 10, adicionar 0 a esquerda. Ex: 02:09
+    
+    temporizadorEl.innerHTML = `${minutos}:${segundos}`;
+    
+    tempo--;
+    tempo = tempo < 0 ? 0 : tempo; //impedir que o temporizador passe para numeros negativos
+}
+
 var grid = document.getElementById("grid");
 var testMode = false; //Turn this variable to true to see where the mines are
 generateGrid();
