@@ -276,7 +276,13 @@ function clickCell(cell) {
 
 
 function cheatButton() {
-  revealMines();
+  //Highlight all mines in red (different from revealMines, due to the bomb img)
+  for (var i = 0; i < dimensao; i++) {
+    for (var j = 0; j < dimensao; j++) {
+      var cell = grid.rows[i].cells[j];
+      if (cell.getAttribute("data-mine") == "true") cell.className = "mine";
+    }
+  }
   setTimeout(function() { // Hides the highlighted mines after 5 seconds
     for (var i = 0; i < dimensao; i++) {
       for(var j = 0; j < dimensao; j++) {
