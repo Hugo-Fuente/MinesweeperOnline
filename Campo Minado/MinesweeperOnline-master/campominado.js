@@ -129,7 +129,7 @@ function revealMines() {
     for (var i=0; i<10; i++) {
       for(var j=0; j<10; j++) {
         var cell = grid.rows[i].cells[j];
-        if (cell.getAttribute("data-mine")=="true") cell.className="mine";
+        if (cell.getAttribute("data-mine")=="true") cell.className="mine", cell.innerHTML="💣";
       }
     }
 }
