@@ -234,15 +234,25 @@ function checkLevelCompletion() {
   if (levelComplete) {
     alert("VITÓRIA");
     revealMines();
+    endGame();
   }
 }
 
+function endGame() {
+  //create an function that will block the user from clicking on the grid 
+  for(var i = 0; i < dimensao; i++) {
+    for(var j = 0; j < dimensao; j++) {
+      grid.rows[i].cells[j].onclick = function() { return false; };
+    }
+  }
+}
 
 function clickCell(cell) {
   //Check if the end-user clicked on a mine
   if (cell.getAttribute("data-mine") == "true") {
     revealMines();
     alert("Game Over");
+    endGame();
   } else {
     cell.className = "clicked";
     //Count and display the number of adjacent mines
