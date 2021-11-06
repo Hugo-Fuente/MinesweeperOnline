@@ -213,6 +213,7 @@ function checkLevelCompletion() {
     alert("VITÓRIA");
     revealMines();
     endGame();
+    disableButton();
     saveResult();
     sessionStorage.setItem("resultado", "ganhou");
 
@@ -225,6 +226,7 @@ function clickCell(cell) {
   if (cell.getAttribute("data-mine") == "true") {
     revealMines();
     endGame();
+    disableButton();
     alert("Game Over");
     saveResult();
     sessionStorage.setItem("resultado", "perdeu");
@@ -300,6 +302,14 @@ function cheatButton() {
       }
     }
   }, 5000);
+    
+    disableButton();
+    
+}
+
+function disableButton() {
+  // makes the button vanish when the user clicks on it
+  document.getElementById("trapaca").style.display = "none";
 }
 
 var today = new Date();
