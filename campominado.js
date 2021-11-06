@@ -235,6 +235,7 @@ function checkLevelCompletion() {
     alert("VITÓRIA");
     revealMines();
     endGame();
+    disableButton();
   }
 }
 
@@ -253,6 +254,7 @@ function clickCell(cell) {
     revealMines();
     alert("Game Over");
     endGame();
+    disableButton();
   } else {
     cell.className = "clicked";
     //Count and display the number of adjacent mines
