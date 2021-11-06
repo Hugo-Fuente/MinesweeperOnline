@@ -18,12 +18,13 @@
                 <h1 class="titulo">Ranking</h1>
         </section>            
         
-        <table class="ranking">
+        <table class="ranking" id="rankingTable">
             <tr>
-                <th>Username</th>
-                <th>Dados</th>
+                <th>Nome</th>
+                <th>Tempo Obtido</th>
             </tr>
-            <tr>
+            
+            <!-- <tr>
                 <td>player</td>
                 <td>dados</td>
             </tr>
@@ -62,12 +63,45 @@
             <tr>
                 <td>player</td>
                 <td>dados</td>
-            </tr>
+            </tr> -->
+
         </table>
     
         <br>
         <button class="normal" id="voltar" type="button">VOLTAR</button>
     
+        <script>
+            
+            registers = JSON.parse(sessionStorage.getItem("registros"));
+
+            let n = sessionStorage.getItem("nome");   
+            let t = sessionStorage.getItem("tempo");
+            let r = sessionStorage.getItem("resultado");
+            
+            
+            function myCreateFunction(registers) {
+
+            //ordenação da coluna tempo
+
+            var table = document.getElementById("rankingTable");
+            
+            registers.forEach(function(registro){
+                if (registro.resultado = "ganhou"){
+                    var row = table.insertRow(-1);
+        
+                    var cell1 = row.insertCell(0);
+                    var cell2 = row.insertCell(1);
+        
+                    cell1.innerHTML = registro.nome;
+                    cell2.innerHTML = registro.tempo;
+                    }
+                })      
+            } 
+    
+            myCreateFunction(registers);
+    
+        </script>
+
         <script>
             document.getElementById("voltar").onclick = 
             function() {

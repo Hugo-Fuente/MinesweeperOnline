@@ -26,35 +26,6 @@ function cadastrar() {
     return false;
 }
 
-
-function login() {
-    var forms = document.forms["formulario"];
-    var dados = {
-        'username': forms['username'],
-        'senha': forms["senha"].value
-    }
-    
-    var txt = document.getElementById("invalido");
-    var txt = "";
-
-    var Ucadastrado = sessionStorage.getItem("username")
-    var Scadastrada = sessionStorage.getItem("senha");
-
-    if(dados.username != Ucadastrado)
-    {
-        alert("username");
-        alert(dados.username);
-    }
-    else if (dados.senha != Scadastrada)
-        alert("senha");
-    else
-        txt += "Username e/ou senha inválidos";
-        document.getElementById("invalido").innerHTML = txt;
-
-    return false;
-}
-
-
 function alterar() {
   var forms = document.forms["formulario"];
   var dados = {
@@ -107,6 +78,13 @@ function configs() {
     "O número de bombas deve respeitar o tamanho do grid";
     return false;
   }
+
+}
+
+
+
+function buildParam() {
+  window.location.href='historico.html';
 }
 
 
@@ -235,26 +213,24 @@ function checkLevelCompletion() {
     alert("VITÓRIA");
     revealMines();
     endGame();
-    disableButton();
+    saveResult();
+    sessionStorage.setItem("resultado", "ganhou");
+
   }
 }
 
-function endGame() {
-  //create an function that will block the user from clicking on the grid 
-  for(var i = 0; i < dimensao; i++) {
-    for(var j = 0; j < dimensao; j++) {
-      grid.rows[i].cells[j].onclick = function() { return false; };
-    }
-  }
-}
 
 function clickCell(cell) {
   //Check if the end-user clicked on a mine
   if (cell.getAttribute("data-mine") == "true") {
     revealMines();
-    alert("Game Over");
     endGame();
-    disableButton();
+    alert("Game Over");
+    saveResult();
+    sessionStorage.setItem("resultado", "perdeu");
+
+
+
   } else {
     cell.className = "clicked";
     //Count and display the number of adjacent mines
@@ -286,6 +262,27 @@ function clickCell(cell) {
   }
 }
 
+function endGame() {
+  //create an function that will block the user from clicking on the grid 
+  for(var i = 0; i < dimensao; i++) {
+    for(var j = 0; j < dimensao; j++) {
+      grid.rows[i].cells[j].onclick = function() { return false; };
+    }
+  }
+}
+
+function saveResult(){
+
+  let tempo = document.querySelector("#tempo").innerText
+  let dimensao = document.querySelector("#dimensao").innerText
+  let bombas = document.querySelector("#bombas").innerText
+  let modalidade = document.querySelector("#modalidade").innerText
+
+  sessionStorage.setItem("tempo", tempo);
+  sessionStorage.setItem("dimensao", dimensao);
+  sessionStorage.setItem("bombas", bombas);
+  sessionStorage.setItem("modalidade", modalidade);
+  }
 
 function cheatButton() {
   //Highlight all mines in red (different from revealMines, due to the bomb img)
@@ -305,7 +302,8 @@ function cheatButton() {
   }, 5000);
 }
 
-function disableButton() {
-  // disable the button after the user clicks on it
-  document.getElementById("trapaca").disabled = true;
-}
+var today = new Date();
+var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+var dateTime = date+' '+time;
+sessionStorage.setItem("dateTime", dateTime);
