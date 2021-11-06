@@ -302,3 +302,8 @@ function cheatButton() {
     }
   }, 5000);
 }
+
+function disableButton() {
+  // disable the button after the user clicks on it
+  document.getElementById("trapaca").disabled = true;
+}
