@@ -22,7 +22,7 @@ function cadastrar() {
 
     alert("Cadastro concluído");
     forms.reset(); // resetando o forms para a inserção de novos dados
-    window.location.href = "index.html";
+    window.location.href = "login.html";
     return false;
 }
 
@@ -46,9 +46,9 @@ function alterar() {
   return false;
 }
 
-
-
 /*---------------------- JOGO ------------------------*/
+
+var ganhador;
 
 var grid = document.getElementById("grid");
 var testMode = false; // Vira True quando clicamos no botão trapaça
@@ -63,7 +63,6 @@ let segundos = 0;
 let minutos = 0;
 
 generateGrid();
-
 
 function configs() {
   var modo = document.getElementById("modalidade");
@@ -205,10 +204,12 @@ function revealMines() {
   for (var i = 0; i < dimensao; i++) {
     for (var j = 0; j < dimensao; j++) {
       var cell = grid.rows[i].cells[j];
-      if (cell.getAttribute("data-mine") == "true") cell.className = "mine";
+      if (cell.getAttribute("data-mine") == "true") cell.className = "mine", cell.innerHTML = "💣";
     }
   }
 }
+
+
 
 function checkLevelCompletion() {
   var levelComplete = true;
@@ -225,12 +226,13 @@ function checkLevelCompletion() {
     revealMines();
     endGame();
     clearInterval(intervalo);
+    hideButton();
     alert("VITÓRIA");
+    //novoRegisto();
     saveResult();
     sessionStorage.setItem("resultado", "ganhou");
   }
 }
-
 
 function clickCell(cell) {
   //Check if the end-user clicked on a mine
@@ -238,7 +240,9 @@ function clickCell(cell) {
     revealMines();
     endGame();
     clearInterval(intervalo);
+    hideButton();
     alert("GAME OVER");
+    //novoRegisto();
     saveResult();
     sessionStorage.setItem("resultado", "perdeu")
   } else {
@@ -274,7 +278,13 @@ function clickCell(cell) {
 
 
 function cheatButton() {
-  revealMines();
+  // Its different from revealMines() because it does not show the bomb emoji
+  for (var i = 0; i < dimensao; i++) {
+    for(var j = 0; j < dimensao; j++) {
+      var cell = grid.rows[i].cells[j];
+      if (cell.getAttribute("data-mine")=="true") cell.className="mine";
+    }
+  }
   setTimeout(function() { // Hides the highlighted mines after 5 seconds
     for (var i = 0; i < dimensao; i++) {
       for(var j = 0; j < dimensao; j++) {
@@ -283,6 +293,9 @@ function cheatButton() {
       }
     }
   }, 5000);
+
+  hideButton();
+
 }
 
 
@@ -293,6 +306,10 @@ function endGame() {
       grid.rows[i].cells[j].onclick = function() { return false; };
     }
   }
+}
+
+function  hideButton() {
+  document.getElementById('trapaca').style.display = 'none';
 }
 
 
