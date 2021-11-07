@@ -1,19 +1,15 @@
-<!--status: 
-            ° ajustar o tabuleiro ao tamanho do espaço reservado
-              quando temos muitas células no campo minado
-            ° parar e salvar o tempo quando a partida acaba e inserir no historico e ranking o dado
-            ° Rivotril
-            ° criar apenas uma variavel para dimensão 
-              (deixando o tabuleiro quadrado), já que o professor deixou
-            ° arrumar a função clickCell, i.e., ver se 
-              a lógica do jogo está certa (loop na vitória)
-            ° passar as páginas HTML e CSS no verificador
-            °Se sobrar tempo (o que duvido), alinha esses botão pelo amor de deus <3
-            ° Terminar Ranking:
-              - só pode entrar quem tiver ganhado
-              - máximo 10 pessoas na lista
-              - ordenar pro menor tempo
+<!--
+status:     
 
+° ajustar o tabuleiro ao tamanho do espaço reservado
+  quando temos muitas células no campo minado
+° Rivotril
+° toda vez que o histórico é acionado ele está adicionando
+  uma linha com os dados antigos
+° data/hora não atualizam no histórico
+° ordernar o ranking por dimensão e depois por tempo
+° criar um botão de jogar novamente
+° passar as páginas HTML e CSS no verificador
 -->
 
 <!DOCTYPE html>
@@ -36,12 +32,12 @@
     <section id="tela">
 
         <section class="cabecalho">
-                <h1 class="titulo">Campo Minado</h1>
+            <h1 class="titulo">Campo Minado</h1>
         </section>
 
         <aside class="lateral">
             <h4>Informações</h4>
-            <p>Partida não iniciada</p>
+            <p>Não iniciada</p>
         </aside>
 
         <section id="jogo">

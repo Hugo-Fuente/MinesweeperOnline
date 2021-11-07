@@ -26,6 +26,7 @@ function cadastrar() {
     return false;
 }
 
+
 function alterar() {
   var forms = document.forms["formulario"];
   var dados = {
@@ -46,11 +47,21 @@ function alterar() {
 }
 
 
+
 /*---------------------- JOGO ------------------------*/
 
 var grid = document.getElementById("grid");
 var testMode = false; // Vira True quando clicamos no botão trapaça
-dimensao = parseInt(sessionStorage.getItem("dimensaoX"));
+dimensao = parseInt(sessionStorage.getItem("dimensao"));
+
+var today = new Date();
+var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+var dateTime = date+' '+time;
+sessionStorage.setItem("dateTime", dateTime);
+let segundos = 0;
+let minutos = 0;
+
 generateGrid();
 
 
@@ -58,15 +69,13 @@ function configs() {
   var modo = document.getElementById("modalidade");
   var forms = document.forms["formulario"];
   var dados = {
-    'dimensaoX': forms["dimensaoX"].value,
-    'dimensaoY': forms["dimensaoY"].value,
+    'dimensao': forms["dimensao"].value,
     'bombas': forms["bombas"].value,
     'modalidade': modo.value
   }
 
-  if (checagem(dados.dimensaoX, dados.dimensaoY, dados.bombas)) {
-    sessionStorage.setItem("dimensaoX", dados.dimensaoX);
-    sessionStorage.setItem("dimensaoY", dados.dimensaoY);
+  if (checagem(dados.dimensao, dados.bombas)) {
+    sessionStorage.setItem("dimensao", dados.dimensao);
     sessionStorage.setItem("bombas", dados.bombas);
     sessionStorage.setItem("modalidade", dados.modalidade);
   
@@ -74,13 +83,9 @@ function configs() {
     window.location.href = "jogo.html";
     return false;
   } else {
-    document.getElementById("invalido").innerHTML = 
-    "O número de bombas deve respeitar o tamanho do grid";
     return false;
   }
-
 }
-
 
 
 function buildParam() {
@@ -88,8 +93,15 @@ function buildParam() {
 }
 
 
-function checagem(x, y, bombas) {
-  if (bombas > x*y) {
+function checagem(dimensao, bombas) {
+  if (dimensao <= 0 || bombas < 0) {
+    document.getElementById("invalido2").innerHTML = 
+    "<br><br>O tamanho do grid e/ou a quantidade de bombas não podem ser números negativos";
+    return false;
+  }
+  else if (bombas > dimensao**2) {
+    document.getElementById("invalido").innerHTML = 
+    "O número de bombas deve respeitar o tamanho do grid";
     return false;
   } else {
     return true;
@@ -117,8 +129,8 @@ function generateGrid() {
 function infos() {
   var txtDimensaoX = document.getElementById("dimensao");
   var txtDimensaoY = document.getElementById("dimensao");
-  txtDimensaoX = sessionStorage.getItem("dimensaoX");
-  txtDimensaoY = sessionStorage.getItem("dimensaoY");
+  txtDimensaoX = sessionStorage.getItem("dimensao");
+  txtDimensaoY = sessionStorage.getItem("dimensao");
   document.getElementById("dimensao").innerHTML = txtDimensaoX + "x" + txtDimensaoY;
 
   var txtBombas = document.getElementById("bombas");
@@ -132,10 +144,10 @@ function infos() {
 }
 
 
-// criando o cronometro do jogo
-let segundos = 0;
-let minutos = 0;
-setInterval(function(){ tempo() }, 1000);
+function start() {
+  intervalo = setInterval(tempo, 1000);
+}
+
 
 function tempo() {        
   const cronometro = document.getElementById('tempo');
@@ -151,7 +163,7 @@ function tempo() {
 }
 
 
-function inciarRivotril(){
+function iniciarRivotril(){
   if (sessioStorage.getItem("modalidade") == 'rivotril') {
     const comecarMinutos = 10;
     let temporestante = comecarMinutos * 60;
@@ -193,7 +205,7 @@ function revealMines() {
   for (var i = 0; i < dimensao; i++) {
     for (var j = 0; j < dimensao; j++) {
       var cell = grid.rows[i].cells[j];
-      if (cell.getAttribute("data-mine") == "true") cell.className = "mine", cell.innerHTML="💣";
+      if (cell.getAttribute("data-mine") == "true") cell.className = "mine";
     }
   }
 }
@@ -210,13 +222,12 @@ function checkLevelCompletion() {
   }
 
   if (levelComplete) {
-    alert("VITÓRIA");
     revealMines();
     endGame();
-    disableButton();
+    clearInterval(intervalo);
+    alert("VITÓRIA");
     saveResult();
     sessionStorage.setItem("resultado", "ganhou");
-
   }
 }
 
@@ -226,13 +237,10 @@ function clickCell(cell) {
   if (cell.getAttribute("data-mine") == "true") {
     revealMines();
     endGame();
-    disableButton();
-    alert("Game Over");
+    clearInterval(intervalo);
+    alert("GAME OVER");
     saveResult();
-    sessionStorage.setItem("resultado", "perdeu");
-
-
-
+    sessionStorage.setItem("resultado", "perdeu")
   } else {
     cell.className = "clicked";
     //Count and display the number of adjacent mines
@@ -264,6 +272,20 @@ function clickCell(cell) {
   }
 }
 
+
+function cheatButton() {
+  revealMines();
+  setTimeout(function() { // Hides the highlighted mines after 5 seconds
+    for (var i = 0; i < dimensao; i++) {
+      for(var j = 0; j < dimensao; j++) {
+        var cell = grid.rows[i].cells[j];
+        if (cell.getAttribute("data-mine")=="true") cell.className="hidden";
+      }
+    }
+  }, 5000);
+}
+
+
 function endGame() {
   //create an function that will block the user from clicking on the grid 
   for(var i = 0; i < dimensao; i++) {
@@ -273,8 +295,8 @@ function endGame() {
   }
 }
 
-function saveResult(){
 
+function saveResult(){
   let tempo = document.querySelector("#tempo").innerText
   let dimensao = document.querySelector("#dimensao").innerText
   let bombas = document.querySelector("#bombas").innerText
@@ -286,34 +308,6 @@ function saveResult(){
   sessionStorage.setItem("modalidade", modalidade);
   }
 
-function cheatButton() {
-  //Highlight all mines in red (different from revealMines, due to the bomb img)
-  for (var i = 0; i < dimensao; i++) {
-    for (var j = 0; j < dimensao; j++) {
-      var cell = grid.rows[i].cells[j];
-      if (cell.getAttribute("data-mine") == "true") cell.className = "mine";
-    }
-  }
-  setTimeout(function() { // Hides the highlighted mines after 5 seconds
-    for (var i = 0; i < dimensao; i++) {
-      for(var j = 0; j < dimensao; j++) {
-        var cell = grid.rows[i].cells[j];
-        if (cell.getAttribute("data-mine")=="true") cell.className="hidden";
-      }
-    }
-  }, 5000);
-    
-    disableButton();
-    
-}
 
-function disableButton() {
-  // makes the button vanish when the user clicks on it
-  document.getElementById("trapaca").style.display = "none";
-}
 
-var today = new Date();
-var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
-var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-var dateTime = date+' '+time;
-sessionStorage.setItem("dateTime", dateTime);
+/*------------------- RANKING ---------------------*/
