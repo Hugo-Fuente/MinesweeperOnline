@@ -94,34 +94,39 @@
 
         <script>
             
-            let n = sessionStorage.getItem("nome");
-            let d = sessionStorage.getItem("dimensao");
-            let b = sessionStorage.getItem("bombas");
-            let m = sessionStorage.getItem("modalidade"); 
-            let t = sessionStorage.getItem("tempo");
-            let r = sessionStorage.getItem("resultado"); 
+            //function novoRegisto() {
+                let n = sessionStorage.getItem("nome");
+                let d = sessionStorage.getItem("dimensao");
+                let b = sessionStorage.getItem("bombas");
+                let m = sessionStorage.getItem("modalidade"); 
+                let t = sessionStorage.getItem("tempo");
+                let r = sessionStorage.getItem("resultado"); 
+                let dh = sessionStorage.getItem("dateTime");
 
-            let resgistro = {
-                nome: n,
-                dimensao: d,
-                bombas: b,
-                modalidade: m,
-                tempo: t,
-                resultado: r
-            } 
+                let resgistro = {
+                    nome: n,
+                    dimensao: d,
+                    bombas: b,
+                    modalidade: m,
+                    tempo: t,
+                    resultado: r,
+                    datahora: dh
+                } 
 
+                registers = sessionStorage.getItem("registros")
+                if (registers) {
+                    registers = JSON.parse(registers)
+                    registers.push(resgistro)
+                    sessionStorage.setItem("registros",JSON.stringify(registers))
+                } else {
+                    const registerList = [];
+                    registerList.push(resgistro);
+                    sessionStorage.setItem("registros",JSON.stringify(registerList));
+                    registers = registerList
+                }
+            //}
 
-            registers = sessionStorage.getItem("registros")
-            if (registers) {
-                registers = JSON.parse(registers)
-                registers.push(resgistro)
-                sessionStorage.setItem("registros",JSON.stringify(registers))
-            } else {
-                const registerList = [];
-                registerList.push(resgistro);
-                sessionStorage.setItem("registros",JSON.stringify(registerList));
-                registers = registerList
-            }
+            //novoRegistro();
 
             function myCreateFunction(registers) {
             var table = document.getElementById("minhaTabela");
@@ -143,7 +148,7 @@
                 cell4.innerHTML = registro.modalidade;
                 cell5.innerHTML = registro.tempo;
                 cell6.innerHTML = registro.resultado;
-                cell7.innerHTML = sessionStorage.getItem("dateTime");
+                cell7.innerHTML = registro.datahora;
             })
             }
     
