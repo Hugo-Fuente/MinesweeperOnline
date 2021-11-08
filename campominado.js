@@ -205,6 +205,7 @@ function timerRivotril() {
     alert("GAME OVER");
     saveResult();
     sessionStorage.setItem("resultado", "perdeu");
+    setTimeout(function() {window.location.href='historico.html?'}, 4000);
   } 
   else if (segundosRivotril == 0) {
     minutosRivotril--;
@@ -253,11 +254,24 @@ function checkLevelCompletion() {
   if (levelComplete) {
     revealMines();
     endGame();
-    clearInterval(intervalo);
-    sessionStorage.getItem("modalidade") == "rivotril" ? clearInterval(intervaloRivotril) : false;
+    
+    // caso o primeiro clique seja uma bomba
+    typeof intervalo !== 'undefined' ? clearInterval(intervalo) : 
+    document.getElementById('tempo').innerHTML = "00:00";
+    
+    if (sessionStorage.getItem("modalidade") == "rivotril") {
+      if (typeof intervaloRivotril !== 'undefined') {
+        clearInterval(intervaloRivotril);
+      }
+      else {
+        document.getElementById('tempo').innerHTML = "00:00";
+      }
+    }
+
     alert("VITÓRIA");
     saveResult();
     sessionStorage.setItem("resultado", "ganhou");
+    setTimeout(function() {window.location.href='historico.html?'}, 4000);
   }
 }
 
@@ -267,18 +281,27 @@ function clickCell(cell) {
   if (cell.getAttribute("data-mine") == "true") {
     revealMines();
     endGame();
-    clearInterval(intervalo);
-    sessionStorage.getItem("modalidade") == "rivotril" ? clearInterval(intervaloRivotril) : false;
+
+    // caso o primeiro clique seja uma bomba
+    typeof intervalo !== 'undefined' ? clearInterval(intervalo) : 
+    document.getElementById('tempo').innerHTML = "00:00";
+    
+    if (sessionStorage.getItem("modalidade") == "rivotril") {
+      if (typeof intervaloRivotril !== 'undefined') {
+        clearInterval(intervaloRivotril);
+      }
+    }
+
     alert("GAME OVER");
     saveResult();
     sessionStorage.setItem("resultado", "perdeu");
+    setTimeout(function() {window.location.href='historico.html?'}, 4000);
   } else {
     cell.className = "clicked";
     //Count and display the number of adjacent mines
     var mineCount = 0;
     var cellRow = cell.parentNode.rowIndex;
     var cellCol = cell.cellIndex;
-    //alert(cellRow + " " + cellCol);
     for (var i = Math.max(cellRow-1,0); i <= Math.min(cellRow+1, dimensao-1); i++) {
       for(var j = Math.max(cellCol-1,0); j <= Math.min(cellCol+1, dimensao-1); j++) {
         if (grid.rows[i].cells[j].getAttribute("data-mine") == "true"){

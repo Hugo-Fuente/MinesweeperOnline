@@ -27,11 +27,16 @@
         </table>
     
         <br>
+        <button class="normal" id="jogar" type="button">JOGAR</button>
         <button class="normal" id="voltar" type="button">VOLTAR</button>
     </section>
 
     <script>
         ranking();
+
+        document.getElementById("jogar").onclick = 
+        function() { location.href = ("configs.html");
+        };
 
         document.getElementById("voltar").onclick = 
         function() { location.href = ("index.html");
