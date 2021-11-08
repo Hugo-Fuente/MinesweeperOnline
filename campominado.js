@@ -322,7 +322,7 @@ function endGame() {
 }
 
 function  hideButton() {
-  document.getElementById('trapaca').style.display = 'blocked';
+  document.getElementById('trapaca').disabled = 'true';
 }
 
 
