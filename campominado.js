@@ -407,8 +407,6 @@ function myCreateFunction(registers) {
       cell1.innerHTML = registro.nome;
       cell2.innerHTML = registro.dimensao;
       cell3.innerHTML = registro.tempo;
-
-      console.log(i);
     }
 
   })
