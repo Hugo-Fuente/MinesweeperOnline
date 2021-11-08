@@ -335,7 +335,11 @@ function cheatButton() {
       if ((grid.rows[i].cells[j].innerHTML == "") && (grid.rows[i].cells[j].getAttribute("data-mine") == "true")) {
         grid.rows[i].cells[j].className = "mine";
         grid.rows[i].cells[j].innerHTML = "💣";
-      } 
+      }
+      else if ((grid.rows[i].cells[j].innerHTML == "") && (grid.rows[i].cells[j].getAttribute("data-mine") == "false")) {
+        grid.rows[i].cells[j].className = "clicked";
+        grid.rows[i].cells[j].innerHTML = "";
+      }
     }
   }
  
@@ -355,6 +359,7 @@ function cheatButton() {
     }
   }, 5000);
 }
+
 
 function endGame() {
   //create an function that will block the user from clicking on the grid 
@@ -390,17 +395,22 @@ function ranking() {
 function myCreateFunction(registers) {
   //ordenação da coluna tempo
   var table = document.getElementById("rankingTable");
+  ordenar();
 
   registers.forEach(function(registro){
-          ordenar();
-          var row = table.insertRow(-1);       
-          var cell1 = row.insertCell(0);
-          var cell2 = row.insertCell(1);
-          var cell3 = row.insertCell(2);
+    for (var i = 0; i < 10; i++) {
+      var row = table.insertRow(-1);       
+      var cell1 = row.insertCell(0);
+      var cell2 = row.insertCell(1);
+      var cell3 = row.insertCell(2);
 
-          cell1.innerHTML = registro.nome;
-          cell2.innerHTML = registro.dimensao;
-          cell3.innerHTML = registro.tempo;
+      cell1.innerHTML = registro.nome;
+      cell2.innerHTML = registro.dimensao;
+      cell3.innerHTML = registro.tempo;
+
+      console.log(i);
+    }
+
   })
   }
 
@@ -416,21 +426,25 @@ function myCreateFunction(registers) {
 
   function bubbleSort(vetor) {
     var aux;
-    for(var i = vetor.length - 1; i >= 0; i--) {
+    for (var i = vetor.length - 1; i >= 0; i--) {
       for (var j = 0; j < i; j++) {
         if (registers[j].resultado == "ganhou") {
           if (registers[j].dimensao > registers[i].dimensao) {
-          aux = registers[j];
-          registers[j] = registers[i];
-          registers[i] = aux;
-          } else if (registers[j].dimensao == registers[i].dimensao) {
-            if (registers[j].tempo > registers[i].tempo) {
-              aux = registers[j];
-              registers[j] = registers[i];
-              registers[i] = aux;
-            }
+            aux = registers[j];
+            registers[j] = registers[i];
+            registers[i] = aux;
+          } 
+          else if (registers[j].dimensao == registers[i].dimensao) {
+              if (registers[j].tempo > registers[i].tempo) {
+                aux = registers[j];
+                registers[j] = registers[i];
+                registers[i] = aux;
+              }
           }
       
+        }
+        else {
+          continue;
         }
         
         

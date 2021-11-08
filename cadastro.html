@@ -18,20 +18,20 @@
         </section>     
 
         <form name="formulario" onsubmit="return cadastrar()">
-            <p>Nome: <input class="texto" type="text" name="nome" /></p><br>
+            <p>Nome: <input class="texto" type="text" name="nome" required/></p><br>
 
-            <p>CPF: <input class="num" type="num" name="cpf" /></p><br>
+            <p>CPF: <input class="num" type="text" name="cpf" required/></p><br>
 
-            <p>Data de Nascimento: <input class="num" type="date" name="nascimento" /></p><br>
+            <p>Data de Nascimento: <input class="number" type="date" name="nascimento" required/></p><br>
 
-            <p>Username: <input class="texto" type="text" name="username" /></p><br>
+            <p>Username: <input class="texto" type="text" name="username" required/></p><br>
 
-            <p>Email: <input class="texto" type="email" name="email" /></p><br>
+            <p>Email: <input class="texto" type="email" name="email" required/></p><br>
            
-            <p>Telefone:&nbsp;&nbsp;&nbsp;&nbsp; <input class="num" type="num" 
-                name="telefone" /> </p><br>
+            <p>Telefone:&nbsp;&nbsp;&nbsp;&nbsp; <input class="num" type="number" 
+                name="telefone" required/> </p><br>
             
-            <p>Senha: <input class="texto" type="password" name="senha"></p>
+            <p>Senha: <input class="texto" type="password" name="senha" required></p>
 
             <input class="normal" type="submit" value="CADASTRAR" />
         </form>
