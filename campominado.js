@@ -309,10 +309,6 @@ function cheatButton() {
       }
     }
   }, 5000);
-
-  //hide the cheat button
-  hideButton();
-
 }
 
 
@@ -326,7 +322,7 @@ function endGame() {
 }
 
 function  hideButton() {
-  document.getElementById('trapaca').style.display = 'none';
+  document.getElementById('trapaca').style.display = 'blocked';
 }
 
 
