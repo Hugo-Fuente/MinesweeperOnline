@@ -166,6 +166,7 @@ button:disabled {
     border: solid #FFFFFF 2px;
     position: relative;
     display: inline-block;
+    overflow-y: scroll;
 }
 
 #play {
