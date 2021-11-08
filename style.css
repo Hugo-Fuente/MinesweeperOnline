@@ -155,7 +155,7 @@ button:disabled {
     margin-right: 15%;
     color: whitesmoke;
     font-size: 1.35em;
-    text-align: center;
+    text-align: justify;
     display: inline-block;
 }
 
@@ -166,7 +166,6 @@ button:disabled {
     border: solid #FFFFFF 2px;
     position: relative;
     display: inline-block;
-    overflow-y: scroll;
 }
 
 #play {

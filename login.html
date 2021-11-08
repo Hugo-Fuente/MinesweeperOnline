@@ -1,28 +1,13 @@
 <!DOCTYPE html>
 <html lang="pt">
-
 <head>
     <meta charset="UTF-8"/>
     <title>Login</title>
     <link rel="stylesheet" href="style.css" type="text/css">
-	
     <!-- fonte usada em algumas partes do site-->
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Odibee+Sans&display=swap');
     </style>
-
-    
-    <!-- <script>
-
-        function setNome () {
-            let nome = document.querySelector('.username').value;
-            sessionStorage.setItem("username", nome);
-            window.location.href='configs.html'
-        }
-
-    </script> -->
-
-
 </head>
 
 <body>
@@ -44,39 +29,33 @@
 		<button class="normal" type="button" onclick="window.location.href='cadastro.html'">Cadastre-se</button>
     </section>
 
-<script>
-    function login() {
-    var forms = document.forms["formulario"];
-    var dados = {
-        'username': forms['username'].value,
-        'senha': forms["senha"].value
-    }
+    <script>
+        function login() {
+            var forms = document.forms["formulario"];
+            var dados = {
+                'username': forms['username'].value,
+                'senha': forms["senha"].value
+            }
     
-    var txt = document.getElementById("invalido");
-    var txt = "";
+            var txt = document.getElementById("invalido");
+            var txt = "";
+        
+            sessionStorage.setItem("nome", dados.username);
+            sessionStorage.setItem("senha", dados.senha);
+        
+        
+            var Ucadastrado = sessionStorage.getItem("username");
+            var Scadastrada = sessionStorage.getItem("senha");
     
-    sessionStorage.setItem("nome", dados.username);
-    sessionStorage.setItem("senha", dados.senha);
-  
-
-    var Ucadastrado = sessionStorage.getItem("username");
-    var Scadastrada = sessionStorage.getItem("senha");
-
-    if(dados.username != Ucadastrado)
-    {
-        //alert("username");
-        //alert(dados.username);
-    }
-    else if (dados.senha != Scadastrada)
-        alert("senha");
-    else
-        txt += "Username e/ou senha inválidos";
-        document.getElementById("invalido").innerHTML = txt;
-
-    return false;
-}
-</script>
+            if (dados.senha != Scadastrada)
+                alert("senha incorreta");
+            else
+                txt += "Username e/ou senha inválidos";
+                document.getElementById("invalido").innerHTML = txt;
+        
+            return false;
+        }
+    </script>
 
 </body>
-
 </html>

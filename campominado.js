@@ -46,13 +46,15 @@ function alterar() {
   return false;
 }
 
-/*---------------------- JOGO ------------------------*/
 
-var ganhador;
+
+/*---------------------- JOGO ------------------------*/
 
 var grid = document.getElementById("grid");
 var testMode = false; // Vira True quando clicamos no botão trapaça
+var ganhador;
 dimensao = parseInt(sessionStorage.getItem("dimensao"));
+
 
 var today = new Date();
 var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
@@ -63,6 +65,7 @@ let segundos = 0;
 let minutos = 0;
 
 generateGrid();
+
 
 function configs() {
   var modo = document.getElementById("modalidade");
@@ -126,11 +129,9 @@ function generateGrid() {
 
 
 function infos() {
-  var txtDimensaoX = document.getElementById("dimensao");
-  var txtDimensaoY = document.getElementById("dimensao");
-  txtDimensaoX = sessionStorage.getItem("dimensao");
-  txtDimensaoY = sessionStorage.getItem("dimensao");
-  document.getElementById("dimensao").innerHTML = txtDimensaoX + "x" + txtDimensaoY;
+  txtDimensao = sessionStorage.getItem("dimensao");
+  document.getElementById("dimensaoX").innerHTML = txtDimensao;
+  document.getElementById("dimensaoY").innerHTML = txtDimensao;
 
   var txtBombas = document.getElementById("bombas");
   txtBombas = sessionStorage.getItem("bombas");
@@ -138,12 +139,41 @@ function infos() {
 
   document.getElementById("modalidade").innerHTML = sessionStorage.getItem("modalidade");
 
-  //var txtRivotril = document.getElementById("rivotril");
-  //document.getElementById("rivotril").innerHTML = 2;
+  if (sessionStorage.getItem("modalidade") == "rivotril") {
+    txtRivotril = "Rivotril: ";
+    document.getElementById("rivotril").innerHTML = txtRivotril;
+  }
 }
 
 
 function start() {
+  if (sessionStorage.getItem("modalidade") == "rivotril") {
+    switch (true) {
+      case (dimensao <= 2):
+        minutosRivotril = 0;
+        break;
+      case (dimensao <= 4):
+        minutosRivotril = 2;
+        break;
+      case (dimensao <= 6):
+        minutosRivotril = 4;
+        break;
+      case (dimensao <= 8):
+        minutosRivotril = 6;
+        break;
+      case (dimensao <= 10):
+        minutosRivotril = 9;
+        break;
+      case (dimensao <= 20):
+        minutosRivotril = 14;
+        break;
+      default:
+        minutosRivotril = 19;
+        break;
+    }
+    segundosRivotril = 60;
+    intervaloRivotril = setInterval(timerRivotril, 1000);
+  }
   intervalo = setInterval(tempo, 1000);
 }
 
@@ -162,27 +192,27 @@ function tempo() {
 }
 
 
-function iniciarRivotril(){
-  if (sessioStorage.getItem("modalidade") == 'rivotril') {
-    const comecarMinutos = 10;
-    let temporestante = comecarMinutos * 60;
-    const temporizadorEl = document.getElementById('rivotril');
-    setInterval(timerRivotril, 1000); 
+function timerRivotril() {        
+  const cronometroRivotril = document.getElementById('tempoRivotril');
+  segundosRivotril--;
+  segundosRivotril = segundosRivotril < 10 ? '0' + segundosRivotril : segundosRivotril;
+
+  if ((minutosRivotril == 0) && (segundosRivotril == 0)) {
+    revealMines();
+    endGame();
+    clearInterval(intervalo);
+    clearInterval(intervaloRivotril);
+    alert("GAME OVER");
+    saveResult();
+    sessionStorage.setItem("resultado", "perdeu");
+  } 
+  else if (segundosRivotril == 0) {
+    minutosRivotril--;
+    segundosRivotril = 60;
+    minutosRivotril = minutosRivotril < 10 ? '0' + minutosRivotril : minutosRivotril;
   }
-}
-
-
-function timerRivotril() {
-  let minutos = Math.floor(temporestante / 60);
-  minutos = minutos < 10 ? '0' + minutos : minutos; //se minutos < 10, adicionar 0 a esquerda. Ex: 07:23
-
-  let segundos = temporestante % 60;
-  segundos = segundos < 10 ? '0' + segundos : segundos; //se segundos < 10, adicionar 0 a esquerda. Ex: 02:09
-
-  temporizadorEl.innerHTML = `${minutos}:${segundos}`;
-
-  temporestante--;
-  temporestante = temporestante < 0 ? 0 : temporestante; //impedir que o temporizador passe para numeros negativos
+  
+  cronometroRivotril.innerHTML = `${minutosRivotril}:${segundosRivotril}`;
 }
 
 
@@ -209,8 +239,6 @@ function revealMines() {
   }
 }
 
-
-
 function checkLevelCompletion() {
   var levelComplete = true;
     for(var i = 0; i < dimensao; i++) {
@@ -226,13 +254,13 @@ function checkLevelCompletion() {
     revealMines();
     endGame();
     clearInterval(intervalo);
-    hideButton();
+    sessionStorage.getItem("modalidade") == "rivotril" ? clearInterval(intervaloRivotril) : false;
     alert("VITÓRIA");
-    //novoRegisto();
     saveResult();
     sessionStorage.setItem("resultado", "ganhou");
   }
 }
+
 
 function clickCell(cell) {
   //Check if the end-user clicked on a mine
@@ -240,11 +268,10 @@ function clickCell(cell) {
     revealMines();
     endGame();
     clearInterval(intervalo);
-    hideButton();
+    sessionStorage.getItem("modalidade") == "rivotril" ? clearInterval(intervaloRivotril) : false;
     alert("GAME OVER");
-    //novoRegisto();
     saveResult();
-    sessionStorage.setItem("resultado", "perdeu")
+    sessionStorage.setItem("resultado", "perdeu");
   } else {
     cell.className = "clicked";
     //Count and display the number of adjacent mines
@@ -286,11 +313,6 @@ function cheatButton() {
         grid.rows[i].cells[j].className = "mine";
         grid.rows[i].cells[j].innerHTML = "💣";
       } 
-      //else if it was not revealed before and it is not a mine, reveal it
-      else if ((grid.rows[i].cells[j].innerHTML == "") && (grid.rows[i].cells[j].getAttribute("data-mine") == "false")) {
-        grid.rows[i].cells[j].className = "clicked";
-        grid.rows[i].cells[j].innerHTML = "";
-      }
     }
   }
  
@@ -312,6 +334,11 @@ function cheatButton() {
 }
 
 
+function  hideButton() {
+  document.getElementById('trapaca').disabled = 'true';
+}
+
+
 function endGame() {
   //create an function that will block the user from clicking on the grid 
   for(var i = 0; i < dimensao; i++) {
@@ -321,23 +348,75 @@ function endGame() {
   }
 }
 
-function  hideButton() {
-  document.getElementById('trapaca').disabled = 'true';
+
+function saveResult() {
+  let tempo = document.querySelector("#tempo").innerText
+  sessionStorage.setItem("tempo", tempo); 
 }
 
 
-function saveResult(){
-  let tempo = document.querySelector("#tempo").innerText
-  let dimensao = document.querySelector("#dimensao").innerText
-  let bombas = document.querySelector("#bombas").innerText
-  let modalidade = document.querySelector("#modalidade").innerText
+/*------------------- RANKING ---------------------*/
 
-  sessionStorage.setItem("tempo", tempo);
-  sessionStorage.setItem("dimensao", dimensao);
-  sessionStorage.setItem("bombas", bombas);
-  sessionStorage.setItem("modalidade", modalidade);
+
+function ranking() {
+  registers = JSON.parse(sessionStorage.getItem("registros"));
+
+  let n = sessionStorage.getItem("nome");  
+  let d = sessionStorage.getItem("dimensao"); 
+  let t = sessionStorage.getItem("tempo");
+  let r = sessionStorage.getItem("resultado");
+  var numLinhas = 0;
+
+  myCreateFunction(registers);
+}
+
+function myCreateFunction(registers) {
+  //ordenação da coluna tempo
+  var table = document.getElementById("rankingTable");
+
+  registers.forEach(function(registro){
+          ordenar();
+          var row = table.insertRow(-1);       
+          var cell1 = row.insertCell(0);
+          var cell2 = row.insertCell(1);
+          var cell3 = row.insertCell(2);
+
+          cell1.innerHTML = registro.nome;
+          cell2.innerHTML = registro.dimensao;
+          cell3.innerHTML = registro.tempo;
+  })
   }
 
 
+  function ordenar() {
+    try {
+      bubbleSort(registers);
+    } catch (err) {
+        alert("Erro: " + err);
+    }
+  }
 
-/*------------------- RANKING ---------------------*/
+
+  function bubbleSort(vetor) {
+    var aux;
+    for(var i = vetor.length - 1; i >= 0; i--) {
+      for (var j = 0; j < i; j++) {
+        if (registers[j].resultado == "ganhou") {
+          if (registers[j].dimensao > registers[i].dimensao) {
+          aux = registers[j];
+          registers[j] = registers[i];
+          registers[i] = aux;
+          } else if (registers[j].dimensao == registers[i].dimensao) {
+            if (registers[j].tempo > registers[i].tempo) {
+              aux = registers[j];
+              registers[j] = registers[i];
+              registers[i] = aux;
+            }
+          }
+      
+        }
+        
+        
+      }
+	  }  
+  }
