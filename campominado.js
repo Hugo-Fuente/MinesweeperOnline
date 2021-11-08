@@ -356,12 +356,6 @@ function cheatButton() {
   }, 5000);
 }
 
-
-function  hideButton() {
-  document.getElementById('trapaca').disabled = 'true';
-}
-
-
 function endGame() {
   //create an function that will block the user from clicking on the grid 
   for(var i = 0; i < dimensao; i++) {
