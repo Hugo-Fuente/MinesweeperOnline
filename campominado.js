@@ -278,22 +278,39 @@ function clickCell(cell) {
 
 
 function cheatButton() {
-  // Its different from revealMines() because it does not show the bomb emoji
+  //show all the cells except the ones that were already revealed when the cheat button was pressed
   for (var i = 0; i < dimensao; i++) {
-    for(var j = 0; j < dimensao; j++) {
-      var cell = grid.rows[i].cells[j];
-      if (cell.getAttribute("data-mine")=="true") cell.className="mine";
+    for (var j = 0; j < dimensao; j++) {
+      //if it was not revealed before and it is a mine, reveal it
+      if ((grid.rows[i].cells[j].innerHTML == "") && (grid.rows[i].cells[j].getAttribute("data-mine") == "true")) {
+        grid.rows[i].cells[j].className = "mine";
+        grid.rows[i].cells[j].innerHTML = "💣";
+      } 
+      //else if it was not revealed before and it is not a mine, reveal it
+      else if ((grid.rows[i].cells[j].innerHTML == "") && (grid.rows[i].cells[j].getAttribute("data-mine") == "false")) {
+        grid.rows[i].cells[j].className = "clicked";
+        grid.rows[i].cells[j].innerHTML = "";
+      }
     }
   }
-  setTimeout(function() { // Hides the highlighted mines after 5 seconds
+ 
+  //hide all the cells except the ones that were already revealed after 5 seconds
+  setTimeout(function() {
     for (var i = 0; i < dimensao; i++) {
-      for(var j = 0; j < dimensao; j++) {
-        var cell = grid.rows[i].cells[j];
-        if (cell.getAttribute("data-mine")=="true") cell.className="hidden";
+      for (var j = 0; j < dimensao; j++) {
+        if (grid.rows[i].cells[j].innerHTML == "") {
+          grid.rows[i].cells[j].className = "";
+          grid.rows[i].cells[j].innerHTML = "";
+        }
+        else if (grid.rows[i].cells[j].getAttribute("data-mine") == "true") {
+          grid.rows[i].cells[j].className = "";
+          grid.rows[i].cells[j].innerHTML = "";
+        }
       }
     }
   }, 5000);
 
+  //hide the cheat button
   hideButton();
 
 }
