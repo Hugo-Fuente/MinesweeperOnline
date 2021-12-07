@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang = "pt-br">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Editar</title>
+    <link rel="stylesheet" href="style.css" type="text/css">
+    <!-- fonte usada em algumas partes do site-->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Odibee+Sans&display=swap');
+        table, th, td {
+        border: 1px solid black;
+        border-collapse: collapse;
+        }
+    </style>
+</head>
+<body>
+
+<form action="editarperfil.php" method="POST">       
+    <p>Nome: <input class="texto" type="text" name="nome" required/></p>
+
+    <p>Data de Nascimento: <input class="number" type="date" name="datanasc" required/></p>
+
+    <p>Email: <input class="texto" type="email" name="email" required/></p>
+
+    <p>Telefone: <input class="num" type="text" name="telefone" required/> </p>
+    
+    <p>Senha: <input class="texto" type="password" name="senha" required></p>
+
+    <input class="normal" type="submit" value="Editar" name="editar"/>
+</form>
+
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang = "pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro</title>
+</head>
+<body>     
+
+    <form action="cadastrar.php" method="POST">
+        <p>CPF: <input class="num" type="number" name="cpfa" required/></p> <!-- primary key -->
+        
+        <p>Username: <input class="texto" type="text" name="username" required/></p>
+        
+        <p>Nome: <input class="texto" type="text" name="nome" required/></p>
+
+        <p>Data de Nascimento: <input class="number" type="date" name="datanasc" required/></p>
+
+        <p>Email: <input class="texto" type="email" name="email" required/></p>
+    
+        <p>Telefone: <input class="num" type="text" name="telefone" required/> </p>
+        
+        <p>Senha: <input class="texto" type="password" name="senha" required></p>
+
+        <input class="normal" type="submit" value="CADASTRAR" name="cadastro"/>
+    </form>      
+    <button class="normal" type="button" onclick="window.location.href='index.html'">voltar</button>
+
+</body>
+</html>
